@@ -49,7 +49,7 @@ const ProfileSection = ({
      
       <div className="company-card">
         <div className="company-logo">
-          <span>M</span>
+          <span>P</span>
         </div>
         <span className="company-name">{company}</span>
       </div>
