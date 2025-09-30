@@ -26,24 +26,55 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
 - **Interest Mapping**: Circular visualizations of content interests
 
 
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 16+ installed
+- npm or yarn package manager
+- VS Code (recommended)
+
 ### Installation Steps
 
- **Install Frontend Dependencies**
+1. **Download/Clone the Project**
+   ``bash
+   git clone <https://github.com/kabiraboss/instagram-main/tree/main>
+cd <project-folder>
+   cd instagram-main
+   ```
+
+2. **Install Frontend Dependencies**
+   ``bash
    npm install
+   ```
 
-
- **Install Backend Dependencies**
+3. **Install Backend Dependencies**
+   `bash
    cd server
    npm install
+   cd ..
+   ``
+
+ *Start the Development Environment*
    
- **Start the Development Environment**
+    Run both servers separately *
    
    Terminal 1 (Frontend):
+   `bash
    npm run dev
+   ``
    
    Terminal 2 (Backend):
+   `bash
    cd server
    npm start
+   ``
+   
+ 
+
+ **Access the Application**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:3001
+
 
 ### Database Setup
 The SQLite database is automatically initialized with sample data when the server starts. The database includes:
