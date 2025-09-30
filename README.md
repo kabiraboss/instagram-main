@@ -47,7 +47,7 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
    ```
 
 4. **Install Backend Dependencies**
-   ``bash
+   ```bash
    cd server
    npm install
    cd ..
