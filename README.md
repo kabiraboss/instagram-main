@@ -117,6 +117,7 @@ The SQLite database is automatically initialized with sample data when the serve
 - Posts grid with engagement overlays
 - Reels gallery with video previews  
 - Vibe classification and event detection
+- This project simulates an AI/ML workflow for demonstration purposes. The predictions and training are random/static values, meant only to show how a real AI app would look. Future versions may integrate an actual ML model.
 
 ### Analytics Dashboard
 - Daily engagement trend charts
