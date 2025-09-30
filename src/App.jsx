@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const profileData = await fetchInfluencerProfile('ralph_edwards');
+        const profileData = await fetchInfluencerProfile('Rohit kumar');
         setProfile(profileData);
       } catch (error) {
         console.error('Error loading profile:', error);
