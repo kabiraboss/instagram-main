@@ -36,19 +36,18 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
 ### Installation Steps
 
 1. **Download/Clone the Project**
-   ``bash
+   ```bash
    git clone <https://github.com/kabiraboss/instagram-main/tree/main>
-cd <project-folder>
    cd instagram-main
-   ```
+  
 
-2. **Install Frontend Dependencies**
-   ``bash
+3. **Install Frontend Dependencies**
+   ```bash
    npm install
    ```
 
-3. **Install Backend Dependencies**
-   `bash
+4. **Install Backend Dependencies**
+   ``bash
    cd server
    npm install
    cd ..
@@ -59,12 +58,12 @@ cd <project-folder>
     Run both servers separately *
    
    Terminal 1 (Frontend):
-   `bash
+   ``bash
    npm run dev
    ``
    
    Terminal 2 (Backend):
-   `bash
+   ``bash
    cd server
    npm start
    ``
