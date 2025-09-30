@@ -55,7 +55,7 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
 
  *Start the Development Environment*
    
-    Run both servers separately *
+    Run both servers separately 
    
    Terminal 1 (Frontend):
    ```bash
