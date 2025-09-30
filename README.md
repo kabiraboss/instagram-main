@@ -14,8 +14,7 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
 
 ### Backend
 - **REST API**: Express.js server with SQLite database
-- **Instagram Scraping**: Simulated scraping pipeline with realistic data generation
-- **Data Processing**: AI-powered image and video analysis capabilities
+- **Data Processing**:  image and video analysis capabilities
 - **Analytics Engine**: Advanced metrics calculation including authenticity and trust scores
 
 ### Key Metrics & Analytics
@@ -65,7 +64,7 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
    Terminal 2 (Backend):
    ```bash
    cd server
-   npm start
+   node server.js
    ```
    
  
@@ -144,8 +143,7 @@ instagram-influencer-analytics/
 │   └── index.css          
 ├── server/                  Backend Express application
 │   ├── server.js           
-│   ├── database.js          Database operations
-│   ├── scraper.js          
+│   ├── database.js          Database operations         
 │   └── package.json         Backend dependencies
 ├── public/                 
 ├── package.json            
@@ -155,7 +153,6 @@ instagram-influencer-analytics/
 
  ✅ Modern frontend development with React and JavaScrip
  ✅ Backend API development with Express.js and SQLite
- ✅ Data engineering with scraping and processing pipelines
  ✅ Professional UI/UX design with responsive layouts
  ✅ Full-stack integration with REST API communication
 
