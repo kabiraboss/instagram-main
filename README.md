@@ -58,15 +58,15 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
     Run both servers separately *
    
    Terminal 1 (Frontend):
-   ``bash
+   ```bash
    npm run dev
-   ``
+   ```
    
    Terminal 2 (Backend):
-   ``bash
+   ```bash
    cd server
    npm start
-   ``
+   ```
    
  
 
