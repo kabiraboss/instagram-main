@@ -11,7 +11,7 @@ class Database {
 
   init() {
     this.db.serialize(() => {
-     
+      
       this.db.run(`
         CREATE TABLE IF NOT EXISTS influencers (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,7 +42,7 @@ class Database {
           likes INTEGER DEFAULT 0,
           comments INTEGER DEFAULT 0,
           timestamp DATETIME,
-          tags TEXT, -- JSON array as string
+          tags TEXT,
           vibe TEXT,
           lighting_quality INTEGER,
           composition_quality INTEGER,
@@ -52,7 +52,7 @@ class Database {
         )
       `);
 
-      
+     
       this.db.run(`
         CREATE TABLE IF NOT EXISTS reels (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -64,9 +64,9 @@ class Database {
           likes INTEGER DEFAULT 0,
           comments INTEGER DEFAULT 0,
           timestamp DATETIME,
-          tags TEXT, -- JSON array as string
+          tags TEXT,
           vibe TEXT,
-          events TEXT, -- JSON array as string
+          events TEXT,
           created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (influencer_id) REFERENCES influencers (id)
         )
@@ -90,7 +90,6 @@ class Database {
         )
       `);
 
-      
       this.insertSampleData();
     });
   }
@@ -112,58 +111,85 @@ class Database {
     };
 
     this.db.get("SELECT id FROM influencers WHERE username = ?", [sampleInfluencer.username], (err, row) => {
-      if (err) {
-        console.error('Error checking existing influencer:', err);
-        return;
-      }
+      if (err) return console.error('Error checking existing influencer:', err);
 
       if (!row) {
-        this.db.run(`
-          INSERT INTO influencers (username, name, profile_image, followers, following, posts_count, verified, location, age, status, occupation, company)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `, Object.values(sampleInfluencer), function(err) {
-          if (err) {
-            console.error('Error inserting sample influencer:', err);
-            return;
-          }
-          
-          const influencerId = this.lastID;
-          console.log('Inserted sample influencer with ID:', influencerId);
-          
-         
-          const sampleAnalytics = {
-            influencer_id: influencerId,
-            authenticity_score: 85,
-            engagement_level: 'Mid',
-            quality_score: 8.2,
-            risk_level: 'Low Risk',
-            trust_score: 8.0,
-            avg_likes: 2834,
-            avg_comments: 156,
-            engagement_rate: 3.2
-          };
-          
-          
-          db.db.get("SELECT id FROM analytics WHERE influencer_id = ?", [influencerId], (err, analyticsRow) => {
-            if (err) {
-              console.error('Error checking existing analytics:', err);
-              return;
-            }
+        this.db.run(
+          `INSERT INTO influencers (username, name, profile_image, followers, following, posts_count, verified, location, age, status, occupation, company)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          Object.values(sampleInfluencer),
+          function (err) {
+            if (err) return console.error('Error inserting sample influencer:', err);
+
+            const influencerId = this.lastID;
+            console.log('Inserted sample influencer with ID:', influencerId);
+
             
-            if (!analyticsRow) {
-              db.db.run(`
-                INSERT INTO analytics (influencer_id, authenticity_score, engagement_level, quality_score, risk_level, trust_score, avg_likes, avg_comments, engagement_rate)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-              `, Object.values(sampleAnalytics), (err) => {
-                if (err) {
-                  console.error('Error inserting sample analytics:', err);
-                } else {
-                  console.log('Inserted sample analytics');
-                }
-              });
+            const sampleAnalytics = {
+              influencer_id: influencerId,
+              authenticity_score: 85,
+              engagement_level: 'Mid',
+              quality_score: 8.2,
+              risk_level: 'Low Risk',
+              trust_score: 8.0,
+              avg_likes: 2834,
+              avg_comments: 156,
+              engagement_rate: 3.2
+            };
+
+            db.db.run(
+              `INSERT INTO analytics (influencer_id, authenticity_score, engagement_level, quality_score, risk_level, trust_score, avg_likes, avg_comments, engagement_rate)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              Object.values(sampleAnalytics),
+              (err) => {
+                if (err) console.error('Error inserting sample analytics:', err);
+                else console.log('Inserted sample analytics');
+              }
+            );
+
+            
+            for (let i = 1; i <= 12; i++) {
+              db.db.run(
+                `INSERT INTO posts (influencer_id, post_id, image_url, caption, likes, comments, timestamp, tags, vibe, lighting_quality, composition_quality, visual_appeal)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                  influencerId,
+                  `post_${i}`,
+                  `https://picsum.photos/400/400?random=${i}`,
+                  `Amazing moment captured! #tag${i}`,
+                  Math.floor(Math.random() * 5000) + 1000,
+                  Math.floor(Math.random() * 500) + 50,
+                  new Date(Date.now() - i * 86400000).toISOString(),
+                  JSON.stringify(['tag1', 'tag2']),
+                  'casual',
+                  Math.floor(Math.random() * 30) + 70,
+                  Math.floor(Math.random() * 20) + 80,
+                  Math.floor(Math.random() * 25) + 75
+                ]
+              );
             }
-          });
-        });
+
+            for (let i = 1; i <= 8; i++) {
+              db.db.run(
+                `INSERT INTO reels (influencer_id, reel_id, thumbnail_url, caption, views, likes, comments, timestamp, tags, vibe, events)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                [
+                  influencerId,
+                  `reel_${i}`,
+                  `https://picsum.photos/400/711?random=${i}`,
+                  `Check out this amazing content! #reel${i}`,
+                  Math.floor(Math.random() * 100000) + 10000,
+                  Math.floor(Math.random() * 8000) + 2000,
+                  Math.floor(Math.random() * 800) + 100,
+                  new Date(Date.now() - i * 86400000).toISOString(),
+                  JSON.stringify(['event1', 'event2']),
+                  'party',
+                  JSON.stringify(['scene1', 'scene2'])
+                ]
+              );
+            }
+          }
+        );
       }
     });
   }
@@ -176,7 +202,6 @@ class Database {
       LEFT JOIN analytics a ON i.id = a.influencer_id
       WHERE i.username = ?
     `;
-    
     this.db.get(query, [username], callback);
   }
 
@@ -187,7 +212,6 @@ class Database {
       ORDER BY timestamp DESC 
       LIMIT ?
     `;
-    
     this.db.all(query, [influencerId, limit], callback);
   }
 
@@ -198,7 +222,6 @@ class Database {
       ORDER BY timestamp DESC 
       LIMIT ?
     `;
-    
     this.db.all(query, [influencerId, limit], callback);
   }
 
