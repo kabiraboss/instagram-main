@@ -5,6 +5,12 @@ A comprehensive full-stack web application for analyzing Instagram influencer pr
 
 ## Features
 
+- Built a full-stack web app with React.js (frontend) and Express.js (backend) to analyze influencer data.
+
+- Implemented REST APIs with Node.js and stored structured data (posts, reels, profiles) in SQLite (portable SQL database).
+
+- Designed reusable components, integrated APIs, and displayed analytics in an interactive UI.
+
 ### Frontend
 - **Modern React Application**: Built with JavaScript, CSS, and Lucide React icons
 - **Responsive Design**: Optimized for all device sizes with a mobile-first approach
@@ -80,6 +86,12 @@ The SQLite database is automatically initialized with sample data when the serve
 - Posts and reels data  
 - Analytics metrics
 - Engagement history
+- 
+  ### 📌 Why SQLite?
+
+- This project uses SQLite as the database because it is lightweight, file-based, and requires no separate server installation.
+- It makes the project easy to set up and portable — anyone can clone the repo and run it without configuring MySQL/Postgres.
+- The schema is SQL-based, so it can be migrated to MySQL or PostgreSQL if needed for larger-scale applications.
 
 ## API Endpoints
 
